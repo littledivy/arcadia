@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+
+    <!-- Page Content -->
+    <div class="page-single">
+        <div class="modal-block modal-visible">
+            <div class="modal-brand">
+                <div class="modal-brand-caption">
+                    <div class="logo">Arca<span>Dia</span></div>
+                </div>
+            </div>
+            <div class="modal-block-content">
+                <h3>Register a new account!</h3>
+                <form class="form-horizontal" autocomplete="off" action="/users/register" method="POST">
+                    <%if(error && error.length > 0){%>
+                        <%= error %>
+                    <%}%>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="r_email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="r_password" class="form-control" />
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="r_cpassword">Confirm Password</label>
+                        <input type="password" name="r_cpassword" id="r_cpassword" class="form-control" />
+                    </div> -->
+                    <div class="form-group" >
+                        <p class="help-block"><a class="link-underline">Forgot your password?</a></p>
+                        <p class="help-block2 mb-25">Already have an account? Login <a href="/users/login" class="clr-primary link-underline">here</a>.</p>
+                        <button type="submit" class="btn btn-block btn-radius btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<% include partials/footer %>
+

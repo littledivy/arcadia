@@ -1,0 +1,36 @@
+<% include partials/header %>
+
+    <!-- Page Content -->
+    <div class="invitation">
+        <div class="invitation-header">
+            You've been invited to join
+        </div>
+        <div class="invitation-info">
+            <div class="col">
+                <div class="group-avatar"><img src="<%= channel.channel_picture %>" /></div>
+            </div>
+            <div class="col">
+                <h6 class="mb-10"><%= channel.channel_name %></h6>
+                <ul class="group-stats">
+                    <li><%= channel.participant.length %> users registered</li>
+                    <% var count = 0; %>
+                    <% channel.participant.forEach(function(participant){ %>
+                        <% if(participant.online === true){ %>
+                            <% count++ ; %>
+                        <% } %>
+                    <% }); %>
+                    <li><%= count %> online users</li>
+                </ul>
+                <a href="/" class="decline link-underline">Decline Invitation</a>
+            </div>
+        </div>
+        <div class="invitation-join">
+                <form action="/channel/join/<%= channel._id %>" method="POST">
+                    <button type="submit" class="btn btn-block btn-primary">Join</button>
+                </form> 
+        </div>
+    </div>
+
+
+<% include partials/footer %>
+
