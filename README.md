@@ -4,6 +4,7 @@
 </p>
 
 ![Node.js CI](https://github.com/divy-work/arcadia/workflows/Node.js%20CI/badge.svg)
+[![Build Status](https://travis-ci.com/divy-work/arcadia.svg?branch=master)](https://travis-ci.com/divy-work/arcadia)
 
 # Installing
 
