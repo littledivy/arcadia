@@ -34,7 +34,7 @@
                                     <a href="/users/<%= message.author._id %>" class="chat-message-author"><%= message.author.username %></a>
                                     <span class="chat-message-date"><%= moment(message.created_at).format("lll")  %></span>
                                     <div class="chat-message-message">
-                                            <%= message.text %>  
+                                            <%- message.text %>  
                                     </div>
                                 </div>
                         </div>

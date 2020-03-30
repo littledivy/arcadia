@@ -24,21 +24,18 @@
                             <div class="col-md-6">
                                 <h6 class="text-bold mb-25">Friend List</h6>
                                 <div class="friend-list scroll-hijack">
-                         <!---           <ul class="list">
-                                        <li><a href="#"><div class="avatar"><img class="little_avatar" src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random5884</a></li>
-                                        <li><a href="#"><div class="avatar"><img class="little_avatar" src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random3858</a></li>
-                                        <li><a href="#"><div class="avatar"><img class="little_avatar" src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random2381</a></li>
-                                        <li><a href="#"><div class="avatar"><img class="little_avatar" src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random3858</a></li>
-                                        <li><a href="#"><div class="avatar"><img class="little_avatar" src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random2381</a></li>
-                                        <li><a href="#"><div class="avatar"><img class="little_avatar" src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random2948</a></li>
-                                    </ul> --->
+      <ul class="list">
+                           <% friends.forEach(function(frnd) { %>
+                                        <li><a href="/users/<%= frnd.id %>"><div class="avatar"><img class="little_avatar" src="<%= frnd.profile_picture %>" /></div><%= frnd.username %></a></li>
+             <% }); %>                                
+    </ul>
                                 </div>
                                 <h6 class="text-bold mt-25">Groups List</h6>
-                                <p class="mb-25 clr-fade text-small">Click a group to copy the invite link to clipboard</p>
+                                <p class="mb-25 clr-fade text-small">Your groups are displayed here.</p>
                                 <div class="groups-list scroll-hijack">
                                     <ul class="list">
                                         <% channels.forEach(function(channel){ %>
-                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="https://minicord.herokuapp.com/channel/join/<%=channel._id%>"><div class="avatar"><img class="little_avatar" src="<%= channel.channel_picture %>" /></div><%=channel.channel_name%></a></li>
+                                            <li><a href="/channel/<%=channel._id%>" data-clipboard-text="<%=channel.id%>"><div class="avatar"><img class="little_avatar" src="<%= channel.channel_picture %>" /></div><%=channel.channel_name%></a></li>
                                         <%});%>
                                     </ul>
                                 </div>

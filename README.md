@@ -1,10 +1,10 @@
-# MiniCord
+# Arcadia
 <p align="center">
-  <img width="150" height="100" src="https://github.com/ThalKod/discord-clone/blob/master/MiniCord.png"> </br>
+  <img width="150" height="100" src="https://github.com/ThalKod/discord-clone/blob/master/arcadia.png"> </br>
   A "Discord clone" with Socket.io, Node.js &amp; MongoDB... 
 </p>
 
-![Profile MiniCord](https://github.com/ThalKod/discord-clone/blob/master/Profile_Screen.png)
+![Profile arcadia](https://github.com/ThalKod/discord-clone/blob/master/Profile_Screen.png)
 
 
 # :floppy_disk: Installation
@@ -23,7 +23,7 @@ $ npm start
 ```
 Make sure you start mongodb or correct env var...
 ```js
-config.dbURL = process.env.DATABASEURL || "mongodb://localhost/minicord";
+config.dbURL = process.env.DATABASEURL || "mongodb://localhost/arcadia";
 ```
 
 
