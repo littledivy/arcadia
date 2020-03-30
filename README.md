@@ -5,7 +5,6 @@
 
 ![Node.js CI](https://github.com/divy-work/arcadia/workflows/Node.js%20CI/badge.svg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2ab802aff4be4a2c9bf39c82def628a5)](https://app.codacy.com/manual/DivySrivastava/arcadia?utm_source=github.com&utm_medium=referral&utm_content=divy-work/arcadia&utm_campaign=Badge_Grade_Settings)
-[![Build Status](https://travis-ci.com/divy-work/arcadia.svg?branch=master)](https://travis-ci.com/divy-work/arcadia)
 
 # Installing
 
