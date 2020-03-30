@@ -4,7 +4,8 @@
   "description": "Probably the greatest open source chat platform",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",
     "emoji-js": "^3.5.0",
