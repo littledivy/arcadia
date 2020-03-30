@@ -1,19 +1,17 @@
 # Arcadia
 <p align="center">
-  <img width="150" height="100" src="https://github.com/ThalKod/discord-clone/blob/master/arcadia.png"> </br>
-  A "Discord clone" with Socket.io, Node.js &amp; MongoDB... 
+  Arcadia. The perfect open-source messaging platform.
 </p>
 
-![Profile arcadia](https://github.com/ThalKod/discord-clone/blob/master/Profile_Screen.png)
+![Node.js CI](https://github.com/divy-work/arcadia/workflows/Node.js%20CI/badge.svg)
 
-
-# :floppy_disk: Installation
+# Installing
 
 ```bash
 # clone the repo
-$ git clone https://github.com/ThalKod/discord-clone.git
+$ git clone https://github.com/divy-work/arcadia.git
 
-$ cd discord-clone
+$ cd arcadia
 
 # install the node modules...
 $ npm install
@@ -21,22 +19,26 @@ $ npm install
 # start
 $ npm start
 ```
-Make sure you start mongodb or correct env var...
+
+## Database
+
+Arcadia uses MongoDB for storage of every bit of information.
+So, Make sure you start the MongoDB daemon. 
+```bash
+$ mongod
+```
+
+You can try editing configurations as per your needs.
 ```js
 config.dbURL = process.env.DATABASEURL || "mongodb://localhost/arcadia";
 ```
 
+## Special Thanks
+This repo is actually a complete makeover of [ThalKod's discord-clone](https://github.com/ThalKod/discord-clone) which was archived long ago.
 
 ## Built with
 
-* [Socket io](https://github.com/socketio/socket.io) - Realtime application framework
-* [Nodejs](https://github.com/nodejs/node) - Node.js JavaScript runtime
-
-## Upcomming Features
-- [ ] Friends Request, sending/add people to friends list...
-- [ ] Real time one to one chat with friends...
-- [ ] Direct message friends...
-- [ ] Received Message Notifications...
-- [ ] Emoji Sharing...
-- [ ] Image Sharing within chat...
-- [ ] Files Upload and sharing...
+* [Nodejs](https://github.com/nodejs/node) - Node.js JavaScript runtime.
+* [Socket io](https://github.com/socketio/socket.io) - Websocket library for Node.js.
+* [Mongoose](https://npmjs.org/package/mongoose) - Mongoose ORM for commuication with MongoDB.
+* [Express](https://npmjs.org/package/express) - Express framework for handling HTTP requests.
