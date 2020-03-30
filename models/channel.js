@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const channelSchema = new mongoose.Schema({
-    message: [
+    threads: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Message",
+            ref: "Thread",
         },
     ],
     creator: {

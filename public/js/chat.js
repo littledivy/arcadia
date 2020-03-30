@@ -35,7 +35,8 @@ jQuery("#message-form").on("submit", function(e){
     var data = {
         userID,
         channelID : channelID,
-        message
+        message,
+        currentThreadName: window.currentThreadName
     };
 
 
@@ -108,6 +109,13 @@ function scrollToBottom(){
 
 
 }
+
+$('#thread-input').keypress(function (e) {
+  if (e.which == 13) {
+    $('form#thread-form').submit();
+    return false;    //<---- This is important
+  }
+});
 
 (function fetchOnlineUser(){
     $.get("/current/channel/"+ channelID )

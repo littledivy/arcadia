@@ -7,6 +7,14 @@
     <div id="page">
         <div id="chat-list">
             <a href="/users/@me" class="user"><div class="avatar"><img src="<%= currentUser.profile_picture %>" /></div><%= currentUser.username %></a>
+                        <br>
+           <% channel.threads.forEach(function(thread){ %>
+	    <a class="user" href="<%= thread.thread_name %>">#<%= thread.thread_name %></a>
+           <% }) %>
+            <br>
+           <form id="thread-form" class="container" method="POST" action="create">
+             <input id="thread-input" type="text" align="center" name="thread_name" style="border:none;color:#000;border-radius:4px;padding: 6px;" placeholder="Add New Thread" /><br>
+           </form>
             <ul class="chat-list scroll-hijack">
                     <% channel.participant.forEach(function(participant){ %>
                         <%if(participant._id.equals(currentUser._id)){ %>
@@ -23,11 +31,10 @@
             <div class="page-header clearfix">
                 <span><%= channel.channel_name %></span>
                 <ul>
-                    <!-- <li><a title="Online" href="#">Online - 1</a></li> -->
                 </ul>
             </div>
             <div class="chat-body scroll-hijack">
-                    <% channel.message.forEach(function(message){ %>
+                    <% currentThread.messages.forEach(function(message){ %>
                         <div class="chat-message">
                                 <div class="avatar"><img src="<%= message.author.profile_picture %>" /></div>
                                 <div class="chat-message-content">
@@ -48,5 +55,7 @@
             </div>
         </div>
     </div>
-
+<script>
+window.currentThreadName = "<%= currentThread.thread_name %>";
+</script>
 <% include partials/footer %>

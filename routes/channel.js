@@ -8,6 +8,7 @@ const   crypto      = require("crypto");
 const   User        = require("../models/user");
 const   middleware  = require("../middleware/index");
 const   Channel     = require("../models/channel");
+const   Thread     = require("../models/thread");
 
 const       router = express.Router();
 
@@ -51,19 +52,22 @@ router.post("/new", middleware.isLogedIn, upload.single("channel_picture"), (req
         if(!rUser){
             return res.redirect("/");
         }
-
-        Channel.create(channel).then((rChannel)=>{
-            rUser.channels.push(rChannel._id);
-            rUser.save();
-
-            rChannel.participant.push(rUser._id);
-            // rChannel.online
-            rChannel.save();
-            res.redirect(`/channel/${rChannel._id}`);
-        }).catch((e)=>{
-            console.log(e);
-            res.redirect("back");
-        });
+        Thread.create({
+          thread_name: "general"
+        }).then((rThread) => {
+		      Channel.create(channel).then((rChannel)=>{
+		          rUser.channels.push(rChannel._id);
+		          rUser.save();
+		          rChannel.threads.push(rThread._id)
+		          rChannel.participant.push(rUser._id);
+		          // rChannel.online
+		          rChannel.save();
+		          res.redirect(`/channel/${rChannel._id}`);
+		      }).catch((e)=>{
+		          console.log(e);
+		          res.redirect("back");
+		      });
+        })
     });
 });
 
@@ -128,21 +132,52 @@ router.post("/join/:id", middleware.isLogedIn, (req, res)=>{
         res.redirect("/");
     });
 });
-
-router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
+router.post("/:id/create", middleware.isLogedIn, middleware.isChannelParticipant, (req, res) => {
+  if(!ObjectID.isValid(req.params.id)) { return res.redirect("/") }
+  var thread_name = req.body.thread_name;
+  if(!thread_name) { return res.redirect(`/channel/${req.params.id}/general`) }
+  Channel.findById(ObjectID(req.params.id)).populate("threads").then((rChannel) => {
+    if(!rChannel){
+    	return res.redirect("/");
+    }
+    for(var i=0;i<rChannel.threads.length;i++) {
+     if(rChannel.threads[i].thread_name == thread_name) {
+	return res.redirect(`/channel/${req.params.id}/general`)
+        break;
+     } 
+    }
+    var new_thread = new Thread({ thread_name: thread_name });
+    new_thread.save((err, rThread) => {
+      Channel.findById(ObjectID(req.params.id)).then((rChannelTwo) => {
+        rChannelTwo.threads.push(rThread._id);
+        rChannelTwo.save();  
+	res.redirect(`/channel/${req.params.id}/${thread_name}`)
+      })
+    })
+  })
+})
+router.get("/:id/", middleware.isLogedIn, middleware.isChannelParticipant, (req, res) => {
+  return res.redirect(`/channel/${req.params.id}/general`)
+});
+router.get("/:id/:thread", middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
     if(!ObjectID.isValid(req.params.id)){
         return res.redirect("/");
     }
 
-    Channel.findById(ObjectID(req.params.id)).populate({ path: "message", populate: { path: "author" } }).populate("participant").limit(10).sort({date:-1}).then((rChannel)=>{
+    Channel.findById(ObjectID(req.params.id)).populate({ path: "threads", populate: { path: "messages", populate: { path:"author" } } }).populate("participant").limit(10).sort({date:-1}).then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
         }
-
-
         User.findById(req.user._id).populate("channels").then((rUser)=>{
-            res.render("chat", { channel: rChannel, channels: rUser.channels, title: rChannel.channel_name, moment });
-        });
+             var isThreadValid = true;
+             for(var i=0;i<rChannel.threads.length;i++) {
+                if(rChannel.threads[i].thread_name == req.params.thread) {
+                    return res.render("chat", { channel: rChannel, channels: rUser.channels, title: rChannel.channel_name, moment, currentThread: rChannel.threads[i], threads: rChannel.threads});
+                     break; // highly important
+                  }
+              }
+              if(!isThreadValid) return res.redirect(`/channel/${req.params.id}/general`)
+              }); 
     })
     .catch((e)=>{
         res.redirect("/");
