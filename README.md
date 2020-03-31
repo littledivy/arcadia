@@ -34,6 +34,8 @@ You can try editing configurations as per your needs.
 ```js
 config.dbURL = process.env.DATABASEURL || "mongodb://localhost/arcadia";
 ```
+# Its look and feel
+[![23123123.png](https://i.postimg.cc/4yyMMvs4/23123123.png)](https://postimg.cc/K3XJ3M1C)
 
 ## Special Thanks
 This repo is actually a complete makeover of [ThalKod's discord-clone](https://github.com/ThalKod/discord-clone) which was archived long ago.
