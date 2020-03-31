@@ -164,7 +164,7 @@ router.get("/:id/:thread", middleware.isLogedIn, middleware.isChannelParticipant
         return res.redirect("/");
     }
 
-    Channel.findById(ObjectID(req.params.id)).populate({ path: "threads", populate: { path: "messages", populate: { path:"author" } } }).populate("participant").limit(10).sort({date:-1}).then((rChannel)=>{
+    Channel.findById(ObjectID(req.params.id)).populate({ path: "threads", populate: { path: "messages", populate: { path:"author" } } }).populate("participant").populate("creator").limit(10).sort({date:-1}).then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
         }
@@ -172,7 +172,7 @@ router.get("/:id/:thread", middleware.isLogedIn, middleware.isChannelParticipant
              var isThreadValid = true;
              for(var i=0;i<rChannel.threads.length;i++) {
                 if(rChannel.threads[i].thread_name == req.params.thread) {
-                    return res.render("chat", { channel: rChannel, channels: rUser.channels, title: rChannel.channel_name, moment, currentThread: rChannel.threads[i], threads: rChannel.threads});
+                    return res.render("chat", { channel: rChannel, channels: rUser.channels, title: rChannel.channel_name, admin: rChannel.creator.equals(ObjectID(req.user._id)),  moment, currentThread: rChannel.threads[i], threads: rChannel.threads});
                      break; // highly important
                   }
               }

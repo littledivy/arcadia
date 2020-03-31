@@ -12,15 +12,17 @@
 	    <a class="user" href="<%= thread.thread_name %>">#<%= thread.thread_name %></a>
            <% }) %>
             <br>
+           <% if(admin) { %> 
            <form id="thread-form" class="container" method="POST" action="create">
              <input id="thread-input" type="text" align="center" name="thread_name" style="border:none;color:#000;border-radius:4px;padding: 6px;" placeholder="Add New Thread" /><br>
            </form>
+            <% } %>
             <ul class="chat-list scroll-hijack">
                     <% channel.participant.forEach(function(participant){ %>
                         <%if(participant._id.equals(currentUser._id)){ %>
-
+                         
                         <% }else if(participant.online === true){ %>
-                            <li><a class="user"><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div>hey<%= participant.username %></a></li>
+                            <li><a class="user"><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% }else{ %>
                             <li><a><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% } %>
