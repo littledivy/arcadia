@@ -1,5 +1,6 @@
 <p align="center">
   <img src="profile.png">
+  <br>
   Arcadia. The perfect open-source messaging platform.
 </p>
 
