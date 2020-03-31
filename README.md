@@ -1,4 +1,3 @@
-# Arcadia
 <p align="center">
   <img src="profile.png">
   Arcadia. The perfect open-source messaging platform.
