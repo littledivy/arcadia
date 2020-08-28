@@ -27,7 +27,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "gh-emoji": "^0.2.5",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.17",
     "method-override": "^3.0.0",
     "mime-types": "^2.1.24",
     "mocha": "^7.1.1",
